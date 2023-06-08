@@ -4,6 +4,9 @@ import (
 	"fmt"
 
 	learn_type "LearnGo/type"
+
+	synthetictype "LearnGo/SyntheticType"
+
 )
 
 func main() {
@@ -11,5 +14,7 @@ func main() {
 	fmt.Println("Goのセットアップ")
 
 	learn_type.TypeMain()
+
+	synthetictype.SyntheticTypeMain()
 
 }
