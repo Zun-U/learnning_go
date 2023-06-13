@@ -50,6 +50,9 @@ func  SyntheticTypeMain() {
 
 	// スライスの比較はnilかどうかしか行えない
 	fmt.Println(xsliceZero == nil) // true
+
+	// スライスに要素の追加、「append」
+	SliceAppend()
 }
 
 // ❐❐❐　配列　❐❐❐
@@ -144,7 +147,7 @@ func SliceIndex(){
 }
 //
 // また、配列同様、多次元のスライスをシミュレートすることができる
-var xslice [][] int
+var xslice [][]int
 //
 // リテラル以外を使ってスライスを宣言すると、配列との違いがよくわかる
 var xsliceZero []int // スライスのゼロ値、すなわち「nil」が初期値になる(nilに初期化される)
@@ -158,3 +161,24 @@ var xsliceZero []int // スライスのゼロ値、すなわち「nil」が初�
 // ◇◆◇ スライスは「比較可能」では "ない"
 //       2つのスライスが同じか違うかを判定するのに、「==」や「!=」を使うとコンパイル時のエラーになる
 // 　　　 ※ スライスと比較できるのは「nil」だけ
+//
+
+// ❐　len　❐
+//
+// 関数「len」で配列の長さ(サイズ)が分かるが、この関数はスライスにも使える
+// そして、nilスライスを「len」に渡すと0を返す
+
+// ❐　append　❐
+//
+// スライスの要素を増やすには、関数「append」を使用する
+func SliceAppend(){
+
+	var xapp []int
+
+	xapp = append(xapp, 10)
+
+	fmt.Println(xapp)
+
+}
+//
+//
