@@ -53,6 +53,15 @@ func  SyntheticTypeMain() {
 
 	// スライスに要素の追加、「append」
 	SliceAppend()
+
+	// すでに値が入っているスライスに「append」
+	SliceAppendVal()
+
+	// 複数の要素の値の追加
+	MultiSliceAppend()
+
+	// スライスに別のスライスの全要素を追加する
+	SliceAppendSlice()
 }
 
 // ❐❐❐　配列　❐❐❐
@@ -173,12 +182,56 @@ var xsliceZero []int // スライスのゼロ値、すなわち「nil」が初�
 // スライスの要素を増やすには、関数「append」を使用する
 func SliceAppend(){
 
-	var xapp []int
+	var x []int
 
-	xapp = append(xapp, 10)
+	x = append(x, 10) // 「nil」の後ろに要素の追加
 
-	fmt.Println(xapp)
+	fmt.Println(x)
 
 }
+//
+// 「append」には少なくとも2個の引数(任意の型のスライスと『同じ型』の値)をしていする
+//
+// ☆ 戻り値は『同じ型のスライス』になる
+//
+// 第1引数に指定されたスライスにappendの結果が代入されている
+// 上記の例では「nil」スライスの後ろに追加されているが、次の例のようにすでに要素があるスライスの『最後尾』への追加もできる
+func SliceAppendVal() {
+
+	var x = []int{1, 2, 3}
+
+	x = append(x, 4) // 最後尾へ要素の追加
+
+	fmt.Println(x)
+
+}
+//
+// 複数の値も追加できる
+func MultiSliceAppend() {
+
+	var x = []int{1, 2, 3}
+
+	x = append(x, 4, 5, 6)
+
+	fmt.Println(x)
+
+}
+//
+// ☆ 演算子「...」を使うことでスライスの個々の値を展開することができ、これを使うことでスライスの後に『別のスライスの全要素』を追加できる
+func SliceAppendSlice() {
+
+	x := []int{2, 3 ,4}
+
+	y := []int{20, 30, 40}
+
+	x = append(x, y...) // 「y...」でスライス「y」をスライス「x」の要素の最後尾に追加している
+
+	fmt.Println(x)
+
+}
+//
+// ☆★☆ 「append」の戻り値を変数に代入したりせずに無視すると、コンパイル時のエラーになる
+// 				「=」の左辺と右辺の両方にxを書かなければならないのは面倒だと思うかもしれないが、Go言語は「値呼び出し」の言語
+// 				❐❐❐ 関数に引数を渡す際には、 "必ず" 『値のコピーが作られてから』渡される
 //
 //
