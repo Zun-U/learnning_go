@@ -6,7 +6,6 @@ import (
 	learn_type "LearnGo/type"
 
 	synthetictype "LearnGo/SyntheticType"
-
 )
 
 func main() {
