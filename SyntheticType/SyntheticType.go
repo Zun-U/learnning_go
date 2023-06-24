@@ -111,6 +111,9 @@ func SyntheticTypeMain() {
 
 	// Copy Peace Of Slice
 	CopyPeaceOfSlice()
+
+	// Copy Center Slice
+	CenterSlice()
 }
 
 // ❐❐❐　配列　❐❐❐
@@ -652,17 +655,17 @@ func ArraySlice() {
 //
 // オリジナルとはメモリを共有しない独立したスライスを生成する必要があるのならば、「make」と組み込み関数の「copy」を使う
 func CopySlice() {
-	x := []int{1, 2, 3, 4} // オリジナルのスライス
+	x := []int{1, 2, 3, 4}         // オリジナルのスライス
 	fmt.Println(x, len(x), cap(x)) // [1 2 3 4] 4 4
 
-	y := make([]int, 4) // 長さ4のintのゼロ値のスライス
+	y := make([]int, 4)            // 長さ4のintのゼロ値のスライス
 	fmt.Println(y, len(y), cap(y)) // [0 0 0 0] 4 4
 
-	num := copy(y, x) // 「x」から「y」にコピーする　※戻り値はコピーされた要素数、つまり変数「num」には「4」が代入されている
+	num := copy(y, x)   // 「x」から「y」にコピーする　※戻り値はコピーされた要素数、つまり変数「num」には「4」が代入されている
 	fmt.Println(y, num) // [1 2 3 4] 4
 
 }
-//
+
 // 関数「copy」の引数は2つ
 // ・第1引数はターゲットのスライス
 // ・第2引数がソース(コピー元)のスライス
@@ -672,7 +675,6 @@ func CopySlice() {
 // ★ 戻り値はコピーされた要素数になる
 // ☆☆☆ 「x」や「y」のキャパシティは関係なく、『長さ』が重要になる
 //
-//
 // いつもスライス全体をコピーする必要はない
 // 次のコードは4つの要素を持つスライスの内、先頭の2つの要素を(2つの要素を持つ)スライスにコピーする
 func CopyPeaceOfSlice() {
@@ -680,10 +682,25 @@ func CopyPeaceOfSlice() {
 	x := []int{1, 2, 3, 4}
 	fmt.Println(x, len(x), cap(x)) // [1 2 3 4] 4 4
 
-	y := make([]int, 2)
+	y := make([]int, 2)            // 長さ2のスライスを作る
 	fmt.Println(y, len(y), cap(y)) // [0 0] 2 2
 
-	num := copy(y, x)
+	num := copy(y, x)   // 先頭から2要素だけコピー
 	fmt.Println(y, num) // [1 2] 2
+
+}
+
+// スライスの中央部分のコピーもできる
+func CenterSlice() {
+
+	x := []int{1, 2, 3, 4}
+	fmt.Println(x, len(x), cap(x)) // [1 2 3 4] 4 4
+
+	y := make([]int, 2) // 長さ2のスライスを作成
+	fmt.Println(y, len(y), cap(y)) // [0 0] 2 2
+
+	copy(y, x[1:]) // x[1]からコピー
+
+	fmt.Println(y) // [2 3]
 
 }
